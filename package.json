@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/dmee/learning-vue-ssr/issues"
   },
-  "homepage": "https://github.com/dmee/learning-vue-ssr#readme"
+  "homepage": "https://github.com/dmee/learning-vue-ssr#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "vue": "^2.5.16",
+    "vue-server-renderer": "^2.5.16"
+  }
 }
