@@ -1,12 +1,12 @@
 import {
     createApp
-} from './app'
+} from './app';
 
-const {
+let {
     app,
     router
 } = createApp();
 
 router.onReady(() => {
-    app.$mount('#app')
-})
+    app.$mount('#app');
+});

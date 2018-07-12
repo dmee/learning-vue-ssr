@@ -10,8 +10,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
     devtool: isProd ?
-        false :
-        '#cheap-module-source-map',
+        false : '#cheap-module-source-map',
     output: {
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/dist/',
@@ -47,7 +46,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.styl(us)?$/,
+                test: /\.less$/,
                 use: isProd ?
                     ExtractTextPlugin.extract({
                         use: [{
@@ -56,11 +55,10 @@ module.exports = {
                                     minimize: true
                                 }
                             },
-                            'stylus-loader'
+                            'less-loader'
                         ],
                         fallback: 'vue-style-loader'
-                    }) :
-                    ['vue-style-loader', 'css-loader', 'stylus-loader']
+                    }) : ['vue-style-loader', 'css-loader', 'less-loader']
             },
         ]
     },
@@ -68,21 +66,19 @@ module.exports = {
         maxEntrypointSize: 300000,
         hints: isProd ? 'warning' : false
     },
-    plugins: isProd ?
-        [
-            new VueLoaderPlugin(),
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false
-                }
-            }),
-            new webpack.optimize.ModuleConcatenationPlugin(),
-            new ExtractTextPlugin({
-                filename: 'common.[chunkhash].css'
-            })
-        ] :
-        [
-            new VueLoaderPlugin(),
-            new FriendlyErrorsPlugin()
-        ]
+    plugins: isProd ? [
+        new VueLoaderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new ExtractTextPlugin({
+            filename: 'common.[chunkhash].css'
+        })
+    ] : [
+        new VueLoaderPlugin(),
+        new FriendlyErrorsPlugin()
+    ]
 }
